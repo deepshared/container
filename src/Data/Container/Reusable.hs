@@ -25,7 +25,7 @@ import Control.DeepSeq (NFData, rnf)
 -- === Reusable === --
 ----------------------
 
-data Reusable idx a = Reusable [idx] !a deriving (Generic, Functor, Foldable, Traversable, Monoid)
+data Reusable idx a = Reusable [idx] !a deriving (Generic, Functor, Foldable, Traversable, Semigroup, Monoid)
 type Reusable'    a = Reusable (Index a) a
 
 type instance Index     (Reusable idx a) = Index (Container a)

@@ -34,7 +34,7 @@ import GHC.Generics (Generic)
 -- === Weak === --
 ------------------
 
-data Weak f a = Weak !(Maybe f) !a deriving (Generic, Functor, Foldable, Traversable, Default, Monoid)
+data Weak f a = Weak !(Maybe f) !a deriving (Generic, Functor, Foldable, Traversable, Default, Semigroup, Monoid)
 type Weak'  a = Weak (IdxFinalizer (Index a)) a
 
 -- Instances
@@ -98,7 +98,8 @@ instance Wrapped   (IdxFinalizer idx) where
 
 instance Monoid (IdxFinalizer idx) where
     mempty = wrap' . const $ return ()
-    mappend (unwrap' -> f) (unwrap' -> f') = wrap' $ \idx -> f idx >> f' idx
+instance Semigroup (IdxFinalizer idx) where
+    (<>) (unwrap' -> f) (unwrap' -> f') = wrap' $ \idx -> f idx >> f' idx
 
 -- items
 

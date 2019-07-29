@@ -19,7 +19,7 @@ import Control.DeepSeq (NFData)
 
 #define AUTO (Reusable idx (Resizable style a))
 
-newtype IxedAuto idx style a = IxedAuto AUTO deriving (Generic, Functor, Traversable, Foldable, Monoid, Default)
+newtype IxedAuto idx style a = IxedAuto AUTO deriving (Generic, Functor, Traversable, Foldable, Semigroup, Monoid, Default)
 type    Auto         style a = IxedAuto (Index (Container a)) style a
 
 deriving instance (IsContainer a, FromList (Container a), Default style) => FromList (IxedAuto idx style a)

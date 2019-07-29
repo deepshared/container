@@ -39,7 +39,8 @@ type family Elems t :: [*]
 
 instance Monoid a => Monoid (Hetero a) where
     mempty = Hetero mempty
-    mappend (Hetero a) (Hetero b) = Hetero $ a <> b
+instance Semigroup a => Semigroup (Hetero a) where
+    (<>) (Hetero a) (Hetero b) = Hetero $ a <> b
 
 -- Properties
 

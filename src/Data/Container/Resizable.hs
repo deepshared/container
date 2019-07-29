@@ -25,7 +25,7 @@ import           Control.DeepSeq (NFData)
 -- === Resizable === --
 ----------------------
 
-data Resizable style a = Resizable !style !a deriving (Generic, Show, Functor, Foldable, Traversable, Monoid)
+data Resizable style a = Resizable !style !a deriving (Generic, Show, Functor, Foldable, Traversable, Semigroup, Monoid)
 
 type instance Index     (Resizable s a) = Index (Container a)
 type instance Item      (Resizable s a) = Item  (Container a)
